@@ -20,9 +20,42 @@ fn our_exit(args: &Vec<&str>) -> () {
 	}
 }
 
+
+
+fn our_cwd(args: &Vec<&str>)-> std::io::Result<()> {
+	use std::env;
+    let path = env::current_dir()?;
+    println!("{}", path.display());
+    //process::exit(code);
+    Ok(())
+}
+
+fn our_cd(args: &Vec<&str>) -> () {
+	//use std::process;
+	//use std::env;
+	let mut pp = String::from("");
+	
+	if args.len() == 1{
+		pp.push_str("# ");
+	}
+	if args.len() == 2{
+		pp.push_str("# ");
+		//let code = args[1].parse().unwrap();
+		pp.push_str(args[1]);
+		//match env::set_current_dir(&code) 
+		}
+	
+}
+
 fn run_internal(args: &Vec<&str>) -> () {
 	if args[0] == "exit" {
 		our_exit(&args)
+	}
+	if args[0] == "cd" {
+		our_cd(&args)
+	}
+	if args[0] == "cwd" {
+		our_cwd(&args);
 	}
 }
 
@@ -47,6 +80,8 @@ fn main() {
 	let mut internal_commands = Vec::new();
 	
 	internal_commands.push("exit");
+	internal_commands.push("cd");
+	internal_commands.push("cwd");
 	loop {
 		let mut command = String::from("");
 		print!("{}",prompt);
