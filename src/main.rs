@@ -1,12 +1,25 @@
 fn start_process(args: &Vec<&str>) -> () {
 	use std::process;
-	let mut child = process::Command::new(args[0])
-							.args(args)
-							.spawn()
-							.expect("command failed to start");
-	let ecode = child.wait()
-				.expect("failed to wait on child");
-    assert!(ecode.success());
+	use std::panic;
+
+    //This suppresses the panic verbose remove if required.
+	panic::set_hook(Box::new(|_info| {
+        // do nothing
+    }));
+
+	let result = panic::catch_unwind(|| {
+    	let mut child = process::Command::new(args[0])
+    							.args(args)
+    							.spawn()
+    							.expect("command failed to start");
+    	let ecode = child.wait()
+    				.expect("failed to wait on child");
+        assert!(ecode.success());
+        });
+
+	if result.is_err(){
+		println!("'{}' is not recognized as an internal or extrernal command,\n or operable program", args[0]);
+	}
 }
 
 fn our_exit(args: &Vec<&str>) -> () {

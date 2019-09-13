@@ -1,0 +1,33 @@
+Level 1
+1. echo
+3. copy, rm, mv
+4. prompt
+5. start, exec, fork
+2. cd, pwd, ls
+3. exit
+4. date/time
+
+Level 2
+Part I
+1. wait, signal
+2. tasklist, taskkill
+5. mkdir
+6. touch
+
+Part II
+4. Keyboard Interrupt
+5. cat
+6. grep
+7. variables, for, break
+
+
+Level 3
+1. pipe command, '|'
+2. color
+3. comp or diff (compare)
+4. tab completion
+
+Level 4
+1. Create GUI
+
+  
