@@ -1,3 +1,7 @@
+mod copy;
+mod remove;
+mod mov;
+
 fn start_process(args: &Vec<&str>) -> () {
 	use std::process;
 	use std::panic;
@@ -34,7 +38,6 @@ fn our_exit(args: &Vec<&str>) -> () {
 }
 
 
-
 fn our_cwd(args: &Vec<&str>)-> std::io::Result<()> {
 	use std::env;
     let path = env::current_dir()?;
@@ -42,6 +45,7 @@ fn our_cwd(args: &Vec<&str>)-> std::io::Result<()> {
     //process::exit(code);
     Ok(())
 }
+
 
 fn our_cd(args: &Vec<&str>) -> () {
 	//use std::process;
@@ -60,6 +64,26 @@ fn our_cd(args: &Vec<&str>) -> () {
 	
 }
 
+
+fn our_mkdir(args: &Vec<&str>) -> std::io::Result<()> {
+	use std::fs;
+	if args.len() < 2 {
+		println!("Error: mkdir: no input arguments");
+	}
+	if args.len() == 2 {
+		println!("Creating directory...");
+	}
+	else {
+		println!("Creating directories...");
+	}
+	for i in 1..args.len() {
+		println!();
+    	fs::create_dir(args[i])?;
+    }
+    Ok(())
+}
+
+
 fn run_internal(args: &Vec<&str>) -> () {
 	if args[0] == "exit" {
 		our_exit(&args)
@@ -73,7 +97,20 @@ fn run_internal(args: &Vec<&str>) -> () {
 	if args[0] == "echo" {
 		our_echo(&args);
 	}
+	if args[0] == "mkdir" {
+		our_mkdir(&args);
+	}
+	if args[0] == "cp" {
+		copy::our_copy(&args);
+	}
+	if args[0] == "rm" {
+		remove::our_remove(&args);
+	}
+	if args[0] == "mv" {
+		mov::our_move(&args);
+	}
 }
+
 
 fn set_prompt(args: &Vec<&str>) -> String {
 	let mut pp = String::from("");
@@ -112,6 +149,10 @@ fn main() {
 	internal_commands.push("cd");
 	internal_commands.push("cwd");
 	internal_commands.push("echo");
+	internal_commands.push("mkdir");
+	internal_commands.push("cp");
+	internal_commands.push("rm");
+	internal_commands.push("mv");
 	loop {
 		let mut command = String::from("");
 		print!("{}",prompt);
