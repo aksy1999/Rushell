@@ -70,6 +70,9 @@ fn run_internal(args: &Vec<&str>) -> () {
 	if args[0] == "cwd" {
 		our_cwd(&args);
 	}
+	if args[0] == "echo" {
+		our_echo(&args);
+	}
 }
 
 fn set_prompt(args: &Vec<&str>) -> String {
@@ -87,6 +90,19 @@ fn set_prompt(args: &Vec<&str>) -> String {
 }
 
 
+fn our_echo(args: &Vec<&str>) -> () {
+	let mut pp = String::from("");
+	if args.len() > 1{
+		pp.push_str(args[1]);
+	}
+	for i in 2..args.len() {
+		pp.push_str(" ");
+		pp.push_str(args[i]);
+	}
+	println!("{} ", pp);
+}
+
+
 fn main() {
 	use std::io::{stdin,stdout,Write};
 	let mut prompt = String::from("# ");
@@ -95,6 +111,7 @@ fn main() {
 	internal_commands.push("exit");
 	internal_commands.push("cd");
 	internal_commands.push("cwd");
+	internal_commands.push("echo");
 	loop {
 		let mut command = String::from("");
 		print!("{}",prompt);
