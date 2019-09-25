@@ -1,6 +1,10 @@
 mod copy;
 mod remove;
 mod mov;
+mod cwd;
+mod mkdir;
+mod echo;
+mod cd;
 
 fn start_process(args: &Vec<&str>) -> () {
 	use std::process;
@@ -22,8 +26,10 @@ fn start_process(args: &Vec<&str>) -> () {
         });
 
 	if result.is_err(){
+		// This will catch any error that occurs during the run of a command.
 		println!("'{}' is not recognized as an internal or extrernal command,\n or operable program", args[0]);
 	}
+
 }
 
 fn our_exit(args: &Vec<&str>) -> () {
@@ -38,67 +44,21 @@ fn our_exit(args: &Vec<&str>) -> () {
 }
 
 
-fn our_cwd(args: &Vec<&str>)-> std::io::Result<()> {
-	use std::env;
-    let path = env::current_dir()?;
-    println!("{}", path.display());
-    //process::exit(code);
-    Ok(())
-}
-
-
-fn our_cd(args: &Vec<&str>) -> () {
-	//use std::process;
-	//use std::env;
-	let mut pp = String::from("");
-	
-	if args.len() == 1{
-		pp.push_str("# ");
-	}
-	if args.len() == 2{
-		pp.push_str("# ");
-		//let code = args[1].parse().unwrap();
-		pp.push_str(args[1]);
-		//match env::set_current_dir(&code) 
-		}
-	
-}
-
-
-fn our_mkdir(args: &Vec<&str>) -> std::io::Result<()> {
-	use std::fs;
-	if args.len() < 2 {
-		println!("Error: mkdir: no input arguments");
-	}
-	if args.len() == 2 {
-		println!("Creating directory...");
-	}
-	else {
-		println!("Creating directories...");
-	}
-	for i in 1..args.len() {
-		println!();
-    	fs::create_dir(args[i])?;
-    }
-    Ok(())
-}
-
-
 fn run_internal(args: &Vec<&str>) -> () {
 	if args[0] == "exit" {
 		our_exit(&args)
 	}
 	if args[0] == "cd" {
-		our_cd(&args)
+		cd::our_cd(&args)
 	}
 	if args[0] == "cwd" {
-		our_cwd(&args);
+		cwd::our_cwd(&args);
 	}
 	if args[0] == "echo" {
-		our_echo(&args);
+		echo::our_echo(&args);
 	}
 	if args[0] == "mkdir" {
-		our_mkdir(&args);
+		mkdir::our_mkdir(&args);
 	}
 	if args[0] == "cp" {
 		copy::our_copy(&args);
@@ -124,19 +84,6 @@ fn set_prompt(args: &Vec<&str>) -> String {
 		}
 	}
 	pp
-}
-
-
-fn our_echo(args: &Vec<&str>) -> () {
-	let mut pp = String::from("");
-	if args.len() > 1{
-		pp.push_str(args[1]);
-	}
-	for i in 2..args.len() {
-		pp.push_str(" ");
-		pp.push_str(args[i]);
-	}
-	println!("{} ", pp);
 }
 
 
