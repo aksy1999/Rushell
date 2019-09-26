@@ -1,11 +1,12 @@
 mod copy;
 mod remove;
-//mod mov;
+mod mov;
 mod cwd;
 mod mkdir;
 mod echo;
 mod cd;
 mod grep;
+mod cat;
 
 fn get_arg(char_vec: &Vec<char>, mut start: usize) -> (usize, usize, usize) {
 	let mut comp = ' ';
@@ -107,11 +108,14 @@ fn run_internal(args: &Vec<&str>) -> () {
 	if args[0] == "rm" {
 		remove::our_remove(&args);
 	}
-//	if args[0] == "mv" {
-//		mov::our_move(&args);
-//	}
+	if args[0] == "mv" {
+		mov::our_move(&args);
+	}
 	if args[0] == "grep" {
 		grep::our_grep(&args);
+	}
+	if args[0] == "cat" {
+		cat::our_cat(&args);
 	}
 }
 
@@ -146,6 +150,7 @@ fn main() {
 	internal_commands.push("rm");
 	internal_commands.push("mv");
 	internal_commands.push("grep");
+	internal_commands.push("cat");
 	loop {
 		let mut command = String::from("");
 		print!("{}",prompt);
