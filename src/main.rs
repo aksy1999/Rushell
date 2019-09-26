@@ -7,6 +7,7 @@ mod cd;
 mod grep;
 mod cat;
 mod ls;
+mod datetime;
 // mod mov;
 
 fn get_arg(char_vec: &Vec<char>, mut start: usize) -> (usize, usize, usize) {
@@ -127,6 +128,9 @@ fn run_internal(args: &Vec<&str>) -> () {
 	if args[0] == "ls" {
 		ls::our_ls(&args);
 	}
+	if args[0] == "date" {
+		datetime::date();
+	}
 }
 
 
@@ -162,6 +166,7 @@ fn main() {
 	internal_commands.push("grep");
 	internal_commands.push("cat");
 	internal_commands.push("ls");
+	internal_commands.push("date");
 	loop {
 		let mut command = String::from("");
 		print!("{}",prompt);
