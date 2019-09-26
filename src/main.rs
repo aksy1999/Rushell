@@ -1,5 +1,6 @@
 mod copy;
 mod remove;
+mod remove_single;
 mod cwd;
 mod mkdir;
 mod echo;
@@ -89,9 +90,8 @@ fn our_exit(args: &Vec<&str>) -> () {
 
 pub fn our_move(args: &Vec<&str>) -> (){
 	use copy;
-	use remove;
 	copy::our_copy(&args);
-	remove::our_remove(&args);
+	remove_single::our_remove_single(&args);
 }
 
 fn run_internal(args: &Vec<&str>) -> () {
@@ -131,6 +131,9 @@ fn run_internal(args: &Vec<&str>) -> () {
 	if args[0] == "date" {
 		datetime::date();
 	}
+	// if args[0] == "sleep" {
+	// 	datetime::sleep();
+	// }
 }
 
 
