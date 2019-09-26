@@ -6,6 +6,46 @@ mod mkdir;
 mod echo;
 mod cd;
 
+fn get_arg(char_vec: &Vec<char>, mut start: usize) -> (usize, usize, usize) {
+	let mut comp = ' ';
+	let mut arg_start = start;
+	if char_vec[start] == '"'{
+		comp = '"';
+		start = start+1;
+		arg_start = start;
+	}
+	while char_vec[start]!=comp {
+		start = start+1;
+	}
+	let arg_stop = start;
+	if comp=='"'{
+		start = start+2;
+	}
+	else {
+		start = start+1;
+	}
+	(start, arg_start, arg_stop)
+}
+
+fn get_args_len(char_vec: &Vec<char>) -> i32 {
+	let mut len = 0;
+	let mut i = 0;
+	while i < char_vec.len() {
+		if char_vec[i]=='"' {
+			i = i+1;
+			while char_vec[i]!='"' {
+				i=i+1;
+			}
+		}
+		if char_vec[i]==' ' {
+			len = len + 1;
+		}
+		i=i+1;
+	}
+	len
+}
+
+
 fn start_process(args: &Vec<&str>) -> () {
 	use std::process;
 	use std::panic;
@@ -38,7 +78,7 @@ fn our_exit(args: &Vec<&str>) -> () {
 		process::exit(0);
 	}
 	else {
-		let code = args[1].parse().unwrap();
+		let code:i32 = args[1].parse::<i32>().unwrap();
 		process::exit(code);
 	}
 }
@@ -78,10 +118,11 @@ fn set_prompt(args: &Vec<&str>) -> String {
 		pp.push_str("# ");
 	}
 	else {
-		for i in 1..args.len() {
+		for i in 1..args.len()-1 {
 			pp.push_str(args[i]);
-			pp.push_str(" ");
+			pp.push(' ');
 		}
+		pp.push_str(args[args.len()-1]);
 	}
 	pp
 }
@@ -106,8 +147,19 @@ fn main() {
 		let _=stdout().flush();
 		stdin().read_line(&mut command).expect("Invalid command");
 		command = String::from(command.trim());
-		let split = command.split(" ");
-		let args = split.collect::<Vec<&str>>();
+
+		command.push(' ');
+		
+		let char_vec: Vec<char> = command.chars().collect();
+		let args_l = get_args_len(&char_vec).clone();
+		let mut args:Vec<&str> = Vec::new();
+		let mut start:usize = 0;
+
+		for _i in 0..args_l {
+			let (next, arg_start, arg_stop) = get_arg(&char_vec, start);
+			args.push(&&command[arg_start..arg_stop]);
+			start = next;
+		}
 
 		let mut internal = false;
 
