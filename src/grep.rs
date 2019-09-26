@@ -11,7 +11,7 @@ pub fn our_grep(args: &Vec<&str>) -> (){
 	}
 	if len==1 {
 		let find = args[1];
-		while true {
+		loop {
 			let mut input = String::new();
 			std::io::stdin().read_line(&mut input).unwrap();
 			let input = input.trim();
