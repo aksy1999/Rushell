@@ -1,6 +1,6 @@
 mod copy;
 mod remove;
-mod mov;
+//mod mov;
 mod cwd;
 mod mkdir;
 mod echo;
@@ -107,11 +107,11 @@ fn run_internal(args: &Vec<&str>) -> () {
 	if args[0] == "rm" {
 		remove::our_remove(&args);
 	}
-	if args[0] == "mv" {
-		mov::our_move(&args);
-	}
+//	if args[0] == "mv" {
+//		mov::our_move(&args);
+//	}
 	if args[0] == "grep" {
-		mov::our_move(&args);
+		grep::our_grep(&args);
 	}
 }
 

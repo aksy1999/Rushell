@@ -1,17 +1,37 @@
-// Function for changing directory
-pub fn our_cd(args: &Vec<&str>) -> () {
-	//use std::process;
-	//use std::env;
-	let mut pp = String::from("");
+pub fn our_cd(args: &Vec<&str>) -> ()  {
+	use std::{env};
+	use std::string::String;
+	use std::path::Path;
+	let current_dir = env::current_dir().unwrap();
+	let  path = current_dir.into_os_string().into_string().unwrap();
+
 	
-	if args.len() == 1{
-		pp.push_str("# ");
+	let mut vector_path: Vec<&str> = path.split("/").collect();
+	let _pop = vector_path.pop();
+	
+	if vector_path.len() == 1{
+		let error_path = format!("{}{}",path,"/");
+		let root = Path::new(&error_path);
+		assert!(env::set_current_dir(&root).is_ok());
+		return		
 	}
-	if args.len() == 2{
-		pp.push_str("# ");
-		//let code = args[1].parse().unwrap();
-		pp.push_str(args[1]);
-		//match env::set_current_dir(&code) 
-		}
 	
+	let mut a = vec![];
+	let mut b;
+	for mum in &vector_path {
+		b = format!("{}{}",mum,"/");
+		a.push(b);
+	}
+	let final_string: String = a.into_iter().collect();
+
+	if args[1].trim() == ".." || args[1].trim() == "../"{
+		let root = Path::new(&final_string);
+		assert!(env::set_current_dir(&root).is_ok());
+		
+	}
+	
+	return
 }
+
+
+

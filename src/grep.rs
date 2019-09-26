@@ -1,11 +1,16 @@
 pub fn our_grep(args: &Vec<&str>) -> (){
-	let find = args[1];
+	
 	use std::fs::File;
 	use std::string::String;
 	use std::io::{BufRead, BufReader};
 	
 	let mut len = args.len() - 1;
+	if len == 0 {
+		println!("Error: No input");
+		return
+	}
 	if len==1 {
+		let find = args[1];
 		while true {
 			let mut input = String::new();
 			std::io::stdin().read_line(&mut input).unwrap();
@@ -19,6 +24,7 @@ pub fn our_grep(args: &Vec<&str>) -> (){
 		}
 	}
 	else if len > 1 {
+		let find = args[1];
 		let mut string = args[1];
 		for x in 1..len {
 			let filename = args[x+1].trim();
