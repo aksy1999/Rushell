@@ -5,6 +5,7 @@ mod cwd;
 mod mkdir;
 mod echo;
 mod cd;
+mod grep;
 
 fn get_arg(char_vec: &Vec<char>, mut start: usize) -> (usize, usize, usize) {
 	let mut comp = ' ';
@@ -109,6 +110,9 @@ fn run_internal(args: &Vec<&str>) -> () {
 	if args[0] == "mv" {
 		mov::our_move(&args);
 	}
+	if args[0] == "grep" {
+		mov::our_move(&args);
+	}
 }
 
 
@@ -141,6 +145,7 @@ fn main() {
 	internal_commands.push("cp");
 	internal_commands.push("rm");
 	internal_commands.push("mv");
+	internal_commands.push("grep");
 	loop {
 		let mut command = String::from("");
 		print!("{}",prompt);
