@@ -131,6 +131,9 @@ fn run_internal(args: &Vec<&str>) -> () {
 	if args[0] == "date" {
 		datetime::date();
 	}
+	if args[0] == "clear" {
+		print!("\x1B[2J");
+	}
 	// if args[0] == "sleep" {
 	// 	datetime::sleep();
 	// }
@@ -170,9 +173,14 @@ fn main() {
 	internal_commands.push("cat");
 	internal_commands.push("ls");
 	internal_commands.push("date");
+	internal_commands.push("clear");
 	loop {
 		let mut command = String::from("");
 		print!("{}",prompt);
+		//ctrlc::set_handler(move || {
+		//	println!("received Ctrl+C!");
+		//}).expect("Error setting Ctrl-C handler");
+
 		let _=stdout().flush();
 		stdin().read_line(&mut command).expect("Invalid command");
 		command = String::from(command.trim());
