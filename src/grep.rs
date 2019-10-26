@@ -1,9 +1,10 @@
 pub fn our_grep(args: &Vec<&str>) -> (){
-	
+
 	use std::fs::File;
 	use std::string::String;
 	use std::io::{BufRead, BufReader};
-	
+	use std::io::ErrorKind;
+
 	let mut len = args.len() - 1;
 	if len == 0 {
 		println!("Error: No input");
@@ -30,23 +31,27 @@ pub fn our_grep(args: &Vec<&str>) -> (){
 			let filename = args[x+1].trim();
 			let file = match File::open(filename) {
 				Ok(file) => file,
-				Err(e) => { 
-						println!("{}: file doesn't exist",filename);
+				Err(error) => match error.kind() {
+					ErrorKind::NotFound => {
+						println!("Error: grep: {}: No such file or directory",filename);
 						return
-					  }
-			};	
+					}
+					other_error => {
+						println!("Error: grep: {}: Unexpected Error", filename);
+						return
+					}
+			  	},
+			};
 			let read = BufReader::new(file);
 
 			for (index,line) in read.lines().enumerate(){
-				let line = line.unwrap();			
+				let line = line.unwrap();
 				if line.contains(&args[1]){
 					println!("{}:	{}",filename,line);
 				}
 			}
 
 		}
-		
+
 	}
 }
-
-

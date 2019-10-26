@@ -9,7 +9,7 @@ mod grep;
 mod cat;
 mod ls;
 mod datetime;
-// mod mov;
+mod mov;
 
 fn get_arg(char_vec: &Vec<char>, mut start: usize) -> (usize, usize, usize) {
 	let mut comp = ' ';
@@ -88,11 +88,11 @@ fn our_exit(args: &Vec<&str>) -> () {
 	}
 }
 
-pub fn our_move(args: &Vec<&str>) -> (){
-	use copy;
-	copy::our_copy(&args);
-	remove_single::our_remove_single(&args);
-}
+// pub fn our_move(args: &Vec<&str>) -> (){
+// 	use copy;
+// 	copy::our_copy(&args);
+// 	remove_single::our_remove_single(&args);
+// }
 
 fn run_internal(args: &Vec<&str>) -> () {
 	if args[0] == "exit" {
@@ -117,7 +117,7 @@ fn run_internal(args: &Vec<&str>) -> () {
 		remove::our_remove(&args);
 	}
 	if args[0] == "mv" {
-		our_move(&args);
+		mov::our_move(&args);
 	}
 	if args[0] == "grep" {
 		grep::our_grep(&args);
@@ -160,7 +160,7 @@ fn main() {
 	use std::io::{stdin,stdout,Write};
 	let mut prompt = String::from("# ");
 	let mut internal_commands = Vec::new();
-	
+
 	internal_commands.push("exit");
 	internal_commands.push("cd");
 	internal_commands.push("cwd");
@@ -186,7 +186,7 @@ fn main() {
 		command = String::from(command.trim());
 
 		command.push(' ');
-		
+
 		let char_vec: Vec<char> = command.chars().collect();
 		let args_l = get_args_len(&char_vec).clone();
 		let mut args:Vec<&str> = Vec::new();

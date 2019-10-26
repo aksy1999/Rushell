@@ -2,3 +2,4 @@
 **/*.rs.bk
 */*.pdb
 src/main
+src/newls.rs
