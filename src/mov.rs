@@ -1,6 +1,13 @@
 // mod copy;
 // mod remove;
-pub fn our_move(args: &Vec<&str>) -> (){
+
+fn main(){
+	use std::env;
+	let args: Vec<String> = env::args().collect();
+	our_move(&args);
+}
+
+pub fn our_move(args: &Vec<String>) -> (){
 
 	use std::io::Read;
     use std::io::Write;
@@ -16,8 +23,8 @@ pub fn our_move(args: &Vec<&str>) -> (){
        return
     }
 
-    let source = args[1];
-    let destination = args[2];
+    let source = &args[1];
+    let destination = &args[2];
     let mut file_in = match std::fs::File::open(source) {
 		Ok(file_in) => file_in,
 		Err(error) => match error.kind() {
@@ -25,20 +32,22 @@ pub fn our_move(args: &Vec<&str>) -> (){
 				println!("Error: mv: {}: No such file or directory", source);
 				return
 			}
-			other_error => {
+			_other_error => {
 				println!("Error: mv: {}: Unexpected Error", source);
 				return
 			}
 		},
 	};
+	// let mut file_out = std::fs::File::create(destination);
     let mut file_out = match std::fs::File::create(destination) {
         Ok(file_in) => file_in,
+		// Err(error) => {return}
         Err(error) => match error.kind() {
             ErrorKind::NotFound => {
                 println!("Error: mv: {}: Path to destination file does not exist", destination);
                 return
             }
-            other_error => {
+            _other_error => {
                 println!("Error: mv: {}: Unexpected Error", destination);
                 return
             }

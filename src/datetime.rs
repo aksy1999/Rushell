@@ -1,3 +1,9 @@
+// fn main(){
+// 	use std::env;
+// 	let args: Vec<String> = env::args().collect();
+// 	our_date();
+// }
+
 pub fn date() -> (){
 	extern crate chrono;
 	// use chrono;

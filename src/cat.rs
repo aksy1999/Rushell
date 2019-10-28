@@ -1,4 +1,10 @@
-pub fn our_cat(args: &Vec<&str>) -> (){
+fn main(){
+	use std::env;
+	let args: Vec<String> = env::args().collect();
+	our_cat(&args);
+}
+
+pub fn our_cat(args: &Vec<String>) -> (){
 
 	use std::fs::File;
 	use std::string::String;
@@ -12,7 +18,7 @@ pub fn our_cat(args: &Vec<&str>) -> (){
 
 	else {
 		for x in 1..len {
-			let filename = args[x].trim();
+			let filename = &args[x].trim();
 
 			let file = match File::open(filename) {
 				Ok(file) => file,
@@ -21,7 +27,7 @@ pub fn our_cat(args: &Vec<&str>) -> (){
 						println!("Error: cat: {}: No such file or directory",filename);
 						return
 					}
-					other_error => {
+					_other_error => {
 						println!("Error: cat {}: Unexpected Error", filename);
 						return
 					}
