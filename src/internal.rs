@@ -14,7 +14,12 @@ pub fn init_stack() -> HashMap<String, String> {
 }
 
 pub fn set(key: String, value:String, stack: &mut HashMap<String, String>) -> () {
-	stack.insert(key, value);
+	stack.insert(key.clone(), value.clone());
+	for (rkey, _value) in env::vars() {
+		if rkey==key {
+			env::set_var(&key, &value);
+		}
+	}
 }
 
 pub fn unset(rkey: String, stack: &mut HashMap<String, String>) -> () {
