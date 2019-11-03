@@ -26,7 +26,7 @@ fn run_internal(
 	}
 	// Calls clear (works only in Ubuntu)
 	if &args[0][0] == "clear" {
-		println!("\x1B[2J");
+		print!("\x1B[2J");
 	}
 	// Sets a variable
 	if &args[0][0] == "set" {
@@ -95,8 +95,8 @@ fn run_internal(
 // It returns it execute state as string
 
 fn executer(
-	command: String, 
-	internal_commands: &Vec<String>, 
+	command: String,
+	internal_commands: &Vec<String>,
 	stack: &mut HashMap<String, String>
 	) -> String {
 		let mut command = command;
@@ -138,7 +138,7 @@ fn executer(
 			}
 		}
 
-		if execute=="internal" {	
+		if execute=="internal" {
 			if &run_internal(args_list.clone(), stack, &internal_commands) == "Error"{
 				execute = "Error";
 			}
@@ -156,7 +156,7 @@ fn main() {
 	let mut stack = internal::init_stack();
 	//Initiate the internal commands
 	let mut internal_commands = Vec::new();
-	
+
 	internal_commands.push(String::from("exit"));
 	internal_commands.push(String::from("cd"));
 	internal_commands.push(String::from("clear"));
