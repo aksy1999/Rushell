@@ -18,7 +18,7 @@ pub fn our_mkdir(args: &Vec<String>) -> std::io::Result<()> {
 	}
 	for i in 1..args.len() {
 		println!("  {}", &args[i]);
-		if 0==1{
+		if 1==1{
 	    	fs::create_dir(&args[i])?;
 		}
 		else{
