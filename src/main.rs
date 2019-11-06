@@ -5,6 +5,11 @@ mod spawner;
 mod internal;
 mod parser;
 
+use std::io::*;
+
+use std::panic;
+
+
 
 // This function takes care of running internal commands
 fn run_internal(
@@ -77,8 +82,12 @@ fn run_internal(
 				internal::set(args[0][1].clone(), String::from(i.to_string()), stack);
 				let execute = executer(command.clone(), &internal_commands, stack);
 				// Break if there is error
-				if execute == "Error"{
-					break;
+				// if execute == "Error"{
+				// 	break;
+				// }
+				match execute {
+					Ok(r) => (),
+					Err(e) => break,
 				}
 			}
 			// Unset the variable after for loop is completed
@@ -98,7 +107,9 @@ fn executer(
 	command: String,
 	internal_commands: &Vec<String>,
 	stack: &mut HashMap<String, String>
-	) -> String {
+// ) -> Result<String, ()> {
+// ) -> () {
+) -> std::io::Result<()> {
 		let mut command = command;
 		for (key, value) in stack.clone() {
 			command = command.replace(&format!("${}", key),&value);
@@ -109,44 +120,69 @@ fn executer(
 		let args_list = parser::parser(command);
 		let mut execute = "external";
 
+		let mut flag = 0;
 		if args_list.len() == 0{
-			return String::from(execute);
+			// Ok(());
+			// return String::from(execute);
+			// return "No error".to_string()
+			// return Result<"NoError".to_string(), ()>
+			// Ok("No Error")
+			// Ok(());
+			flag = 1;
 		}
 
 		if &args_list[0][0]==""{
-			return String::from(execute);
+			// return String::from(execute);
+			// return Result<"NoError".to_string(), ()>
+			// return "No error".to_string()
+			// Ok()
+			// Ok("No Error")
+			// Ok(());
+			flag = 1;
 		}
 
-		let args_len = args_list.len();
+		if flag == 0{
+			let args_len = args_list.len();
 
-		for i in 0..args_len{
-			for com in internal_commands {
-				if &&args_list[i][0] == &com{
-					if args_len > 1 {
-						println!("Internal Commands cannot be piped");
-						execute = "Error";
-						break;
-					}
-					else {
-						execute = "internal";
-						break;
+			for i in 0..args_len{
+				for com in internal_commands {
+					if &&args_list[i][0] == &com{
+						if args_len > 1 {
+							println!("Internal Commands cannot be piped");
+							execute = "Error";
+							break;
+						}
+						else {
+							execute = "internal";
+							break;
+						}
 					}
 				}
+				if execute!="external"{
+					break;
+				}
 			}
-			if execute!="external"{
-				break;
-			}
-		}
 
-		if execute=="internal" {
-			if &run_internal(args_list.clone(), stack, &internal_commands) == "Error"{
-				execute = "Error";
+			if execute=="internal" {
+				if &run_internal(args_list.clone(), stack, &internal_commands) == "Error"{
+					execute = "Error";
+				}
+			}
+			if execute=="external" {
+				spawner::pipe(args_list).expect("Error");
+				// let r1 = spawner::pipe(args_list);
+				// match r1 {
+				// 	Ok(r) => Ok(r),
+				// 	Err(e) => {
+				// 		println!("{:?}",e);
+				// 		Err(e)
+				// 	},
+				// };
 			}
 		}
-		if execute=="external" {
-			spawner::pipe(args_list);
-		}
-		String::from(execute)
+		// Ok("No error".to_string())
+		Ok(())
+		// String::from(execute)
 }
 
 
@@ -166,6 +202,7 @@ fn main() {
 	internal_commands.push(String::from("for"));
 
 	// Loop for taking commands
+	// let mut r;
 	loop {
 		let mut command = String::from("");
 		print!("{}",stack["PROMPT"]);
@@ -173,6 +210,7 @@ fn main() {
 		let _=stdout().flush();
 		stdin().read_line(&mut command).expect("Error taking Input");
 
-		executer(command, &internal_commands, &mut stack);
+		executer(command, &internal_commands, &mut stack).expect("Error");
+
 	}
 }
