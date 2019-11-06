@@ -1,4 +1,9 @@
-/target
+target
 **/*.rs.bk
 */*.pdb
 src/main
+src/newls.rs
+*/target
+*/target/*
+*/*/target
+.idea
