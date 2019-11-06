@@ -7,4 +7,8 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+<<<<<<< HEAD
+colored = "1.8"
+=======
 coloured = "1.8"
+>>>>>>> 011b21dfaee9f4b94cb771293165da05890c4cc5

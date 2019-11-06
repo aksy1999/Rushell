@@ -1,3 +1,8 @@
+extern crate colored; // not needed in Rust 2018
+
+use colored::*;
+
+
 fn main(){
 	use std::env;
 	let args: Vec<String> = env::args().collect();
@@ -12,7 +17,11 @@ pub fn our_cat(args: &Vec<String>) -> (){
 	use std::io::ErrorKind;
 	let mut len = args.len() ;
 	if len == 1 {
+<<<<<<< HEAD
+		println!("{}","Error: No input".red());
+=======
 		println!("Error: No input".red());
+>>>>>>> 011b21dfaee9f4b94cb771293165da05890c4cc5
 		return
 	}
 

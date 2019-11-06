@@ -1,6 +1,6 @@
+// mod copy;
+// mod remove;
 
-extern crate colored;
-use colored::*;
 fn main(){
 	use std::env;
 	let args: Vec<String> = env::args().collect();
@@ -14,12 +14,12 @@ pub fn our_move(args: &Vec<String>) -> (){
 	use std::io::ErrorKind;
 
     if args.len() == 1{
-       println!("{} {}", "Error: mov:".red().bold(), " No source and destination files".red());
+       println!("No source and destination files");
        return
     }
 
     if args.len() ==2 {
-       println!("{} {}","Error: mov:".red().bold(), "No destination file".red());
+       println!("No destination file");
        return
     }
 
@@ -29,11 +29,11 @@ pub fn our_move(args: &Vec<String>) -> (){
 		Ok(file_in) => file_in,
 		Err(error) => match error.kind() {
 			ErrorKind::NotFound => {
-				println!("{} {}{}", "Error: mov:".red().bold(), source.to_string().red(), ": No such file or directory".red());
+				println!("Error: mv: {}: No such file or directory", source);
 				return
 			}
 			_other_error => {
-				println!("{} {}{}", "Error: mov:".red().bold(),  source.to_string().red(), ": Unexpected Error".red());
+				println!("Error: mv: {}: Unexpected Error", source);
 				return
 			}
 		},
@@ -44,11 +44,11 @@ pub fn our_move(args: &Vec<String>) -> (){
 		// Err(error) => {return}
         Err(error) => match error.kind() {
             ErrorKind::NotFound => {
-                println!("{} {}{}", "Error: mv:".red().bold(), destination.to_string().red(), ": Path to destination file does not exist");
+                println!("Error: mv: {}: Path to destination file does not exist", destination);
                 return
             }
             _other_error => {
-                println!("{} {}{}", "Error: mov:".red().bold(),  source.to_string().red(), ": Unexpected Error".red());
+                println!("Error: mv: {}: Unexpected Error", destination);
                 return
             }
         },

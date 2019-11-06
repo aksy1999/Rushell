@@ -7,3 +7,7 @@ src/newls.rs
 */target/*
 */*/target
 .idea
+*/*/*/target
+*/*/Cargo.lock
+*/Cargo.lock
+*/*/*/Cargo.lock

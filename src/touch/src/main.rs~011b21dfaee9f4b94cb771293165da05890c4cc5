@@ -1,6 +1,4 @@
-// Funtion that makes a new file
-extern crate colored;
-use colored::*;
+// Funtion that makes a new directory
 fn main(){
 	use std::env;
 	let args: Vec<String> = env::args().collect();
@@ -11,7 +9,7 @@ pub fn our_touch(args: &Vec<String>) -> std::io::Result<()> {
 	use std::fs::File;
     // use std::io::ErrorKind;
 	if args.len() < 2 {
-		println!("{} {}", "Error: touch:".red().bold(), " no input arguments".red());
+		println!("Error: touch: no input arguments");
 	}
 	else {
 		for i in 1..args.len() {
