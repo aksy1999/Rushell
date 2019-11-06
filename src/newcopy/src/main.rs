@@ -45,6 +45,7 @@ pub fn our_copy(args: &Vec<String>) -> (){
 		}
     }
 	else{
+		fs::copy(source, destination);
 		// colour::blue("Invalid source");
 		// println!("Invalid source");
 		println!("{} {}: {}", "Error: cp:".red().bold(), source.to_string().red(), "No such file or directory".red());
