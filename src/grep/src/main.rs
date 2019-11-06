@@ -18,7 +18,7 @@ pub fn our_grep(args: &Vec<String>) -> (){
 		return
 	}
 	if len==1 {
-		let find = args[1];
+		let find = &args[1];
 		loop {
 			let mut input = String::new();
 			std::io::stdin().read_line(&mut input).unwrap();
@@ -26,16 +26,16 @@ pub fn our_grep(args: &Vec<String>) -> (){
 			if input == "EXIT" {
 				break;
 			}
-			if input.contains(&find) {
+			if input.contains(find) {
 				println!("{}",input);
 			}
 		}
 	}
 	else if len > 1 {
-		let find = args[1];
-		let mut string = args[1];
+		let find = &args[1];
+		let mut string = &args[1];
 		for x in 1..len {
-			let filename = args[x+1].trim();
+			let filename = &args[x+1].trim();
 			let file = match File::open(filename) {
 				Ok(file) => file,
 				Err(error) => match error.kind() {
