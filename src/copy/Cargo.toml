@@ -1,0 +1,12 @@
+[package]
+name = "copy"
+version = "0.1.0"
+authors = ["Akhilesh Ravi <akhileshravis@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+fs_extra = "0.x.x"
+colour = "0.x.x"
+colored = "1.8"

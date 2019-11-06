@@ -39,7 +39,7 @@ name = "backtrace-sys"
 version = "0.1.32"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
- "cc 1.0.46 (registry+https://github.com/rust-lang/crates.io-index)",
+ "cc 1.0.47 (registry+https://github.com/rust-lang/crates.io-index)",
  "libc 0.2.65 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
@@ -73,7 +73,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "cc"
-version = "1.0.46"
+version = "1.0.47"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
@@ -123,6 +123,15 @@ version = "0.1.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
+name = "copy"
+version = "0.1.0"
+dependencies = [
+ "colored 1.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "colour 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "fs_extra 0.3.1 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
 name = "crossbeam-utils"
 version = "0.6.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -158,7 +167,7 @@ dependencies = [
  "proc-macro2 1.0.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "quote 1.0.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "syn 1.0.7 (registry+https://github.com/rust-lang/crates.io-index)",
- "synstructure 0.12.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "synstructure 0.12.2 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -180,15 +189,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 name = "libc"
 version = "0.2.65"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-
-[[package]]
-name = "newcopy"
-version = "0.1.0"
-dependencies = [
- "colored 1.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "colour 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "fs_extra 0.3.1 (registry+https://github.com/rust-lang/crates.io-index)",
-]
 
 [[package]]
 name = "nodrop"
@@ -321,7 +321,7 @@ dependencies = [
 
 [[package]]
 name = "synstructure"
-version = "0.12.1"
+version = "0.12.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "proc-macro2 1.0.6 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -386,7 +386,7 @@ dependencies = [
 "checksum bitflags 1.2.1 (registry+https://github.com/rust-lang/crates.io-index)" = "cf1de2fe8c75bc145a2f577add951f8134889b4795d47466a54a5c846d691693"
 "checksum blake2b_simd 0.5.8 (registry+https://github.com/rust-lang/crates.io-index)" = "5850aeee1552f495dd0250014cf64b82b7c8879a89d83b33bbdace2cc4f63182"
 "checksum byteorder 1.3.2 (registry+https://github.com/rust-lang/crates.io-index)" = "a7c3dd8985a7111efc5c80b44e23ecdd8c007de8ade3b96595387e812b957cf5"
-"checksum cc 1.0.46 (registry+https://github.com/rust-lang/crates.io-index)" = "0213d356d3c4ea2c18c40b037c3be23cd639825c18f25ee670ac7813beeef99c"
+"checksum cc 1.0.47 (registry+https://github.com/rust-lang/crates.io-index)" = "aa87058dce70a3ff5621797f1506cb837edd02ac4c0ae642b4542dce802908b8"
 "checksum cfg-if 0.1.10 (registry+https://github.com/rust-lang/crates.io-index)" = "4785bdd1c96b2a846b2bd7cc02e86b6b3dbf14e7e53446c4f54c92a361040822"
 "checksum cgmath 0.16.1 (registry+https://github.com/rust-lang/crates.io-index)" = "64a4b57c8f4e3a2e9ac07e0f6abc9c24b6fc9e1b54c3478cfb598f3d0023e51c"
 "checksum cloudabi 0.0.3 (registry+https://github.com/rust-lang/crates.io-index)" = "ddfc5b9aa5d4507acaf872de71051dfd0e309860e88966e1051e462a077aac4f"
@@ -417,7 +417,7 @@ dependencies = [
 "checksum rust-argon2 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)" = "4ca4eaef519b494d1f2848fc602d18816fed808a981aedf4f1f00ceb7c9d32cf"
 "checksum rustc-demangle 0.1.16 (registry+https://github.com/rust-lang/crates.io-index)" = "4c691c0e608126e00913e33f0ccf3727d5fc84573623b8d65b2df340b5201783"
 "checksum syn 1.0.7 (registry+https://github.com/rust-lang/crates.io-index)" = "0e7bedb3320d0f3035594b0b723c8a28d7d336a3eda3881db79e61d676fb644c"
-"checksum synstructure 0.12.1 (registry+https://github.com/rust-lang/crates.io-index)" = "3f085a5855930c0441ca1288cf044ea4aecf4f43a91668abdb870b4ba546a203"
+"checksum synstructure 0.12.2 (registry+https://github.com/rust-lang/crates.io-index)" = "575be94ccb86e8da37efb894a87e2b660be299b41d8ef347f9d6d79fbe61b1ba"
 "checksum term 0.5.2 (registry+https://github.com/rust-lang/crates.io-index)" = "edd106a334b7657c10b7c540a0106114feadeb4dc314513e97df481d5d966f42"
 "checksum unicode-xid 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)" = "826e7639553986605ec5979c7dd957c7895e93eabed50ab2ffa7f6128a75097c"
 "checksum winapi 0.3.8 (registry+https://github.com/rust-lang/crates.io-index)" = "8093091eeb260906a183e6ae1abdba2ef5ef2257a21801128899c3fc699229c6"
