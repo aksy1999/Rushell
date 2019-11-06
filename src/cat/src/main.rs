@@ -12,7 +12,7 @@ pub fn our_cat(args: &Vec<String>) -> (){
 	use std::io::ErrorKind;
 	let mut len = args.len() ;
 	if len == 1 {
-		println!("Error: No input");
+		println!("Error: No input".red());
 		return
 	}
 
@@ -24,11 +24,11 @@ pub fn our_cat(args: &Vec<String>) -> (){
 				Ok(file) => file,
 				Err(error) => match error.kind() {
 					ErrorKind::NotFound => {
-						println!("Error: cat: {}: No such file or directory",filename);
+						println!("{} {}: {}", "Error: cat:".red().bold(), filename.red(), "No such file or directory".red());
 						return
 					}
 					_other_error => {
-						println!("Error: cat {}: Unexpected Error", filename);
+						println!("{} {}: {}", "Error: cat:".red().bold(), filename.red(), "No such file or directory".red());
 						return
 					}
 			  	},
