@@ -8,5 +8,5 @@ Rohan Patil
 Sumit Walia
 
 # Building the Shell
-To build the shell, just do "cargo build" \\
+To build the shell, just do "cargo build" \
 To run the shell, do "cargo run"
